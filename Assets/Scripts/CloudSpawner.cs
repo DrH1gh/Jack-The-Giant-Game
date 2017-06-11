@@ -96,7 +96,7 @@ public class CloudSpawner : Singleton<CloudSpawner> {
             clouds[i].transform.position = temp;
             positionCloudY -= distanceBetweenClouds;
 
-            //Instantiate cloud
+            //Instantiate cloud from prefab and set parent
             GameObject instanceOfCloud = Instantiate(clouds[i]);
             instanceOfCloud.transform.parent = GameObject.Find("Clouds").transform;
         }
