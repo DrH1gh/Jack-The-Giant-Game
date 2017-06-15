@@ -69,8 +69,8 @@ public class CloudSpawner : Singleton<CloudSpawner> {
             temp.y = positionCloudY;
            
             //Control Cloud Position
-            //This will set clounds left right left right ... 
-            //If you comment this, clouds will be random (example: left right left left right center)
+            //This will set clounds more predictable 
+            //If you comment this, clouds will be random (example: left right - left left - right center)
             if(controlCloudPositionX == 0)
             {
                 temp.x = Random.Range(0.0f, maxCloudPositionX);
