@@ -14,7 +14,6 @@ public class Player : Singleton<Player> {
     public float Speed { get { return speed; } }
     public float MaxVelocity { get { return maxVelocity; } }
 
-
     void Awake()
     {
         playerBody = GetComponent<Rigidbody2D>();
