@@ -28,8 +28,18 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 
         //Creat Clouds
         CreateClouds();
-	}
-	
+
+        //Set Player GameObject
+        player = GameObject.Find("Player");
+
+    }
+
+    void Start()
+    {
+        //Position Player on game start
+        PositionThePlayer();
+    }
+    
 	// Update is called once per frame
 	void Update () {
 		
@@ -100,5 +110,35 @@ public class CloudSpawner : Singleton<CloudSpawner> {
             GameObject instanceOfCloud = Instantiate(clouds[i]);
             instanceOfCloud.transform.parent = GameObject.Find("Clouds").transform;
         }
+    }
+
+    private void PositionThePlayer()
+    {
+        GameObject[] darkClouds = GameObject.FindGameObjectsWithTag("DeadlyCloud");
+        GameObject[] cloudsInGame = GameObject.FindGameObjectsWithTag("Cloud");
+        //DarkCloud Fix!
+        for(int i= 0; i <darkClouds.Length; i++)
+        {
+            //If darkCloud is the first one, change position!
+            if(darkClouds[i].transform.position.y == 0f)
+            {
+                Vector3 oldDarkPosition = darkClouds[i].transform.position;
+                darkClouds[i].transform.position = new Vector3(cloudsInGame[0].transform.position.x, cloudsInGame[0].transform.position.y, cloudsInGame[0].transform.position.z);
+                cloudsInGame[0].transform.position = oldDarkPosition;
+            }
+        }
+
+        //PlayerPosition
+        Vector3 firstCloud = cloudsInGame[0].transform.position;
+
+        for(int i = 1; i < cloudsInGame.Length; i++)
+        {
+            if(firstCloud.y < cloudsInGame[i].transform.position.y)
+            {
+                firstCloud = cloudsInGame[i].transform.position;
+            }
+        }
+        firstCloud.y += 1f;
+        player.transform.position = firstCloud;
     }
 }
