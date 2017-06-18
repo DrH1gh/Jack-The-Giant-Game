@@ -45,6 +45,44 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 		
 	}
 
+    private void OnTriggerEnter2D(Collider2D target)
+    {
+        if (target.tag == "Cloud" || target.tag == "DeadlyCloud")
+        {
+            //lastCoudPositionY - is set on CreatCloud for loop
+            if (target.transform.position.y == lastCoudPositionY)
+            {
+                ShuffleClouds(clouds);
+                ShuffleClouds(collectables);
+
+                Vector3 temp = target.transform.position;
+                //same logic as in CreatCloud
+                if (controlCloudPositionX == 0)
+                {
+                    temp.x = Random.Range(0.0f, maxCloudPositionX);
+                    controlCloudPositionX = 1;
+                }
+                else if (controlCloudPositionX == 1)
+                {
+                    temp.x = Random.Range(0.0f, minCloudPositionX);
+                    controlCloudPositionX = 2;
+                }
+                else if (controlCloudPositionX == 2)
+                {
+                    temp.x = Random.Range(1.0f, maxCloudPositionX);
+                    controlCloudPositionX = 3;
+                }
+                else if (controlCloudPositionX == 2)
+                {
+                    temp.x = Random.Range(-1.0f, minCloudPositionX);
+                    controlCloudPositionX = 0;
+                }
+
+
+            }
+        }
+    }
+
     private void SetMinMax_CloudPosition()
     {
         Vector3 cameraBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -74,7 +112,6 @@ public class CloudSpawner : Singleton<CloudSpawner> {
         for(int i = 0; i < clouds.Length; i += 1)
         {
             
-
             Vector3 temp = clouds[i].transform.position;
             temp.y = positionCloudY;
            
@@ -141,4 +178,6 @@ public class CloudSpawner : Singleton<CloudSpawner> {
         firstCloud.y += 1f;
         player.transform.position = firstCloud;
     }
+
+   
 }
