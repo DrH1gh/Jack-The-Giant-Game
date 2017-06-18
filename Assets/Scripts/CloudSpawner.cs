@@ -57,26 +57,44 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 
                 Vector3 temp = target.transform.position;
                 //same logic as in CreatCloud
-                if (controlCloudPositionX == 0)
+                for(int i =0; i < clouds.Length; i++)
                 {
-                    temp.x = Random.Range(0.0f, maxCloudPositionX);
-                    controlCloudPositionX = 1;
+                    //Only to those not active 
+                    if (!clouds[i].activeInHierarchy)
+                    {
+                        if (controlCloudPositionX == 0)
+                        {
+                            temp.x = Random.Range(0.0f, maxCloudPositionX);
+                            controlCloudPositionX = 1;
+                        }
+                        else if (controlCloudPositionX == 1)
+                        {
+                            temp.x = Random.Range(0.0f, minCloudPositionX);
+                            controlCloudPositionX = 2;
+                        }
+                        else if (controlCloudPositionX == 2)
+                        {
+                            temp.x = Random.Range(1.0f, maxCloudPositionX);
+                            controlCloudPositionX = 3;
+                        }
+                        else if (controlCloudPositionX == 3)
+                        {
+                            temp.x = Random.Range(-1.0f, minCloudPositionX);
+                            controlCloudPositionX = 0;
+                        }
+
+                        //set new postion
+                        temp.y -= distanceBetweenClouds;
+                        //Reasign last position
+                        lastCoudPositionY = temp.y;
+
+                        clouds[i].transform.position = temp;
+                        clouds[i].SetActive(true);
+                    
+                    }
                 }
-                else if (controlCloudPositionX == 1)
-                {
-                    temp.x = Random.Range(0.0f, minCloudPositionX);
-                    controlCloudPositionX = 2;
-                }
-                else if (controlCloudPositionX == 2)
-                {
-                    temp.x = Random.Range(1.0f, maxCloudPositionX);
-                    controlCloudPositionX = 3;
-                }
-                else if (controlCloudPositionX == 2)
-                {
-                    temp.x = Random.Range(-1.0f, minCloudPositionX);
-                    controlCloudPositionX = 0;
-                }
+
+                
 
 
             }
@@ -132,7 +150,7 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                 temp.x = Random.Range(1.0f, maxCloudPositionX);
                 controlCloudPositionX = 3;
             }
-            else if (controlCloudPositionX == 2)
+            else if (controlCloudPositionX == 3)
             {
                 temp.x = Random.Range(-1.0f, minCloudPositionX);
                 controlCloudPositionX = 0;
@@ -142,7 +160,7 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 
             clouds[i].transform.position = temp;
             positionCloudY -= distanceBetweenClouds;
-
+            
             //Instantiate cloud from prefab and set parent
             GameObject instanceOfCloud = Instantiate(clouds[i]);
             instanceOfCloud.transform.parent = GameObject.Find("Clouds").transform;
