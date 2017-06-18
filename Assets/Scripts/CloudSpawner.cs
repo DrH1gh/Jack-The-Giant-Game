@@ -47,6 +47,8 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 
     private void OnTriggerEnter2D(Collider2D target)
     {
+
+        //Respawn new clouds (Instantiate)
         if (target.tag == "Cloud" || target.tag == "DeadlyCloud")
         {
             //lastCoudPositionY - is set on CreatCloud for loop
@@ -89,9 +91,17 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                         lastCoudPositionY = temp.y;
 
                         clouds[i].transform.position = temp;
+                        
+
+                        //Instantiate cloud from prefab and set parent
+                        GameObject instanceOfCloud = Instantiate(clouds[i]);
+                        instanceOfCloud.transform.parent = GameObject.Find("Clouds").transform;
+
                         clouds[i].SetActive(true);
-                    
                     }
+
+
+                    
                 }
 
                 

@@ -8,7 +8,9 @@ public class CloudCollector : Singleton<CloudCollector> {
     {
         if( target.tag == "Cloud" || target.tag == "DeadlyCloud")
         {
-            target.gameObject.SetActive(false);
+            //This works, but its better to destroy the gameObject
+            //target.gameObject.SetActive(false);
+            Destroy(target.gameObject);
         }
     }
 }
