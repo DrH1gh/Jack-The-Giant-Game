@@ -10,7 +10,7 @@ public class BackgroundScale : Singleton<BackgroundScale> {
         Vector3 tempScale = transform.localScale;
 
         float width = sr.sprite.bounds.size.x;
-
+        
         float worldHeight = Camera.main.orthographicSize * 2f;
         float worldWidth = worldHeight / Screen.height * Screen.width;
 

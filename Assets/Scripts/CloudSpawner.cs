@@ -71,7 +71,7 @@ public class CloudSpawner : Singleton<CloudSpawner> {
 
         float positionCloudY = 0f;
 
-        for(int i =0; i < clouds.Length; i += 1)
+        for(int i = 0; i < clouds.Length; i += 1)
         {
             
 
