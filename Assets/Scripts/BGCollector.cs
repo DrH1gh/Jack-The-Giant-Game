@@ -9,7 +9,7 @@ public class BGCollector : Singleton<BGCollector> {
         if(target.tag == "Background")
         {
             target.gameObject.SetActive(false);
-            //We don't use this like in the CloudCollector because we have the BG in the scene NOT Instantiate them !!
+            //ATENTION: We don't use this like in the CloudCollector because we have the BackGrounds in the scene, and we are NOT Instantiate them,
             //Destroy(target.gameObject);
         }
     }
