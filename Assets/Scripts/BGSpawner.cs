@@ -33,6 +33,7 @@ public class BGSpawner : Singleton<BGSpawner> {
                         backgrounds[i].transform.position = lastBg;
                         //Set BG active after we set the new position
                         backgrounds[i].SetActive(true);
+
                     }
                 }
             } 
