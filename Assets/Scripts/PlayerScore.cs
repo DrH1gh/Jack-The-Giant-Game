@@ -49,7 +49,7 @@ public class PlayerScore : Singleton<PlayerScore> {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D target)
+    void OnTriggerEnter2D(Collider2D target)
     {
         if(target.tag == "Coin")
         {
@@ -72,6 +72,7 @@ public class PlayerScore : Singleton<PlayerScore> {
 
         if(target.tag == "Bounds")
         {
+            //Stop camea
             cameraScript.moveCamera = false;
             coutScore = false;
 
@@ -82,6 +83,7 @@ public class PlayerScore : Singleton<PlayerScore> {
 
         if (target.tag == "DeadlyCloud")
         {
+            //Stop camea
             cameraScript.moveCamera = false;
             coutScore = false;
 
