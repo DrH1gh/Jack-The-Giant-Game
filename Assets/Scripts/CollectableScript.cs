@@ -6,7 +6,8 @@ public class CollectableScript : Singleton<CollectableScript>  {
 
     private void OnEnable()
     {
-        Invoke("DestryCollectable", 1f);
+        //After 6 seconds call  DestryCollectable
+        Invoke("DestryCollectable", 6f);
     }
 
     private void OnDisable()

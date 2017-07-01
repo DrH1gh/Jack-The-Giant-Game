@@ -32,6 +32,12 @@ public class CloudSpawner : Singleton<CloudSpawner> {
         //Set Player GameObject
         player = GameObject.Find("Player");
 
+        /* NOT NEEDED when using prefabs
+        for(int i =0; i< collectables.Length; i++)
+        {
+            collectables[i].SetActive(false);
+        }
+        */
     }
 
     void Start()
@@ -98,6 +104,43 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                         instanceOfCloud.transform.parent = GameObject.Find("Clouds").transform;
 
                         clouds[i].SetActive(true);
+
+                        //****************************
+                        //COINS/LIFE
+                        //****************************
+                        int randomIndex = Random.Range(0, collectables.Length);
+
+                        if(clouds[i].tag != "DeadlyCloud")
+                        {
+
+                            if (!collectables[randomIndex].activeInHierarchy)
+                            {
+                                Vector3 tempCloud = clouds[i].transform.position;
+                                tempCloud.y += 0.7f; //set coins/life above cloud
+
+
+                                //Instantiate Coins/Life fom prefabs and set parent
+                                GameObject instanceCoinsLife = Instantiate(collectables[randomIndex]);
+                                instanceCoinsLife.transform.parent = GameObject.Find("Collectables").transform;
+                                collectables[randomIndex].SetActive(false); //disable them befour deciding what to do!
+
+                                if (collectables[randomIndex].tag == "Life")
+                                {
+                                    //Set max PLAYER LIFE
+                                    if(PlayerScore.Instance.lifeScore < 2)
+                                    {
+                                        collectables[randomIndex].transform.position = tempCloud;
+                                        collectables[randomIndex].SetActive(true);
+                                    }
+                                }
+                                else
+                                {
+                                    collectables[randomIndex].transform.position = tempCloud;
+                                    collectables[randomIndex].SetActive(true);
+                                }
+                            }
+                        }
+
                     }
 
 
