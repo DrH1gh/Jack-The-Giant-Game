@@ -32,7 +32,7 @@ public class PlayerScore : Singleton<PlayerScore> {
 
     void Update()
     {
-
+        CountScore();
     }
 
 
@@ -46,6 +46,7 @@ public class PlayerScore : Singleton<PlayerScore> {
                 score++;
             }
             previousPosition = transform.position;
+            GameManager.Instance.SetScore(score);
         }
     }
 
@@ -58,6 +59,10 @@ public class PlayerScore : Singleton<PlayerScore> {
             AudioSource.PlayClipAtPoint(coinSound, transform.position);
             //disable coin
             target.gameObject.SetActive(false);
+
+            //set score
+            GameManager.Instance.SetScore(score);
+            GameManager.Instance.SetCoinScore(coinScore);
         }
 
         if(target.tag == "Life")
@@ -68,6 +73,10 @@ public class PlayerScore : Singleton<PlayerScore> {
             AudioSource.PlayClipAtPoint(lifeSound, transform.position);
             //disable life
             target.gameObject.SetActive(false);
+
+            //set score
+            GameManager.Instance.SetScore(score);
+            GameManager.Instance.SetLifeScore(lifeScore);
         }
 
         if(target.tag == "Bounds")
@@ -79,6 +88,9 @@ public class PlayerScore : Singleton<PlayerScore> {
             lifeScore--;
             //Move player, to make it look like he died.
             transform.position = new Vector3(800, 800, 0);
+            //Fix
+            //Destroy(gameObject);
+           
         }
 
         if (target.tag == "DeadlyCloud")
@@ -90,6 +102,8 @@ public class PlayerScore : Singleton<PlayerScore> {
             lifeScore--;
             //Move player, to make it look like he died.
             transform.position = new Vector3(800, 800, 0);
+            //Fix
+            //Destroy(gameObject);
         }
     }
 }

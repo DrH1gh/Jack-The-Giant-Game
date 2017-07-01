@@ -6,8 +6,8 @@ public class CollectableScript : Singleton<CollectableScript>  {
 
     private void OnEnable()
     {
-        //After 6 seconds call  DestryCollectable
-        Invoke("DestryCollectable", 6f);
+        //After 7.5 seconds call  DestryCollectable
+        Invoke("DestryCollectable", 7.5f);
     }
 
     private void OnDisable()
@@ -17,8 +17,8 @@ public class CollectableScript : Singleton<CollectableScript>  {
 
     private void DestryCollectable()
     {
-        //Destroy(gameObject);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
 }
