@@ -95,11 +95,15 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         //Destoy all instance. 
         Destroy(GameObject.Find("Main Camera"));
         Destroy(GameObject.Find("GamePlayManager"));
+        Destroy(GameObject.Find("Player"));
+       
     }
 
     public void PlayerDiedRestartGame()
     {
+
         StartCoroutine(PlayerDiedRestart());
+        
     }
 
     IEnumerator PlayerDiedRestart()
@@ -107,5 +111,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         yield return new WaitForSeconds(1f);
         
         SceneManager.LoadScene("Game");
+        DestroyAllSingletons();
     }
 }

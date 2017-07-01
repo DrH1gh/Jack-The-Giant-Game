@@ -72,7 +72,7 @@ public class GameManager : Singleton<GameManager> {
             sessionScore = score;
             sessionCoinScore = coinScore;
             sessionLifeScore = lifeScore;
-
+            
             NewGameFomMainMenu = false;
             RestartGamePlayerDied = true;
 
