@@ -12,7 +12,6 @@ public class HighScoreController : Singleton<HighScoreController> {
     // Use this for initialization
     void Start () {
         SetScoreByDifficulty();
-
     }
 
     void SetScore(int score, int coinScore)

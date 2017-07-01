@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start()
     {
-        
+        InitializeGamePref();
     }
 
     // Update is called once per frame
@@ -78,6 +78,29 @@ public class GameManager : Singleton<GameManager> {
 
             GamePlayManager.Instance.PlayerDiedRestartGame();
 
+        }
+    }
+
+    private void InitializeGamePref()
+    {
+        if (!PlayerPrefs.HasKey("DRH Game Init 1"))
+        {
+            GamePeferences.SetEasyDifficulty(0);
+            GamePeferences.SetEasyDiffScore(0);
+            GamePeferences.SetEasyDiffCoinScore(0);
+            //Default
+            GamePeferences.SetMediuDifficulty(1); // true
+            GamePeferences.SetMediumDiffScore(0);
+            GamePeferences.SetMediumDiffCoinScore(0);
+
+            GamePeferences.SetHardDifficulty(0);
+            GamePeferences.SetHardDiffScore(0);
+            GamePeferences.SetHardDiffCoinScore(0);
+
+            GamePeferences.SetMusic(1); //on
+
+            //Il pacalim prin salvaea de cheie
+            PlayerPrefs.SetInt("DRH Game Init 1", 1);
         }
     }
 
