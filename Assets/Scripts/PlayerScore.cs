@@ -87,8 +87,8 @@ public class PlayerScore : Singleton<PlayerScore> {
 
             lifeScore--;
 
-            //GameOver
-            GamePlayManager.Instance.GameOverShowFinalScore(coinScore, score);
+            //Check If game over
+            GameManager.Instance.CheckGameStatus(score, coinScore, lifeScore);
 
             //Move player, to make it look like he died.
             transform.position = new Vector3(800, 800, 0);
@@ -103,10 +103,12 @@ public class PlayerScore : Singleton<PlayerScore> {
             cameraScript.moveCamera = false;
             coutScore = false;
 
-            //GameOver
-            GamePlayManager.Instance.GameOverShowFinalScore(coinScore, score);
-
+            
             lifeScore--;
+
+            //Check If game over
+            GameManager.Instance.CheckGameStatus(score, coinScore, lifeScore);
+
             //Move player, to make it look like he died.
             transform.position = new Vector3(800, 800, 0);
             //Fix

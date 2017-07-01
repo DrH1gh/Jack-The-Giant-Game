@@ -96,4 +96,16 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Destroy(GameObject.Find("Main Camera"));
         Destroy(GameObject.Find("GamePlayManager"));
     }
+
+    public void PlayerDiedRestartGame()
+    {
+        StartCoroutine(PlayerDiedRestart());
+    }
+
+    IEnumerator PlayerDiedRestart()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        SceneManager.LoadScene("Game");
+    }
 }
