@@ -46,7 +46,7 @@ public class PlayerScore : Singleton<PlayerScore> {
                 score++;
             }
             previousPosition = transform.position;
-            GameManager.Instance.SetScore(score);
+            GamePlayManager.Instance.SetScore(score);
         }
     }
 
@@ -61,8 +61,8 @@ public class PlayerScore : Singleton<PlayerScore> {
             target.gameObject.SetActive(false);
 
             //set score
-            GameManager.Instance.SetScore(score);
-            GameManager.Instance.SetCoinScore(coinScore);
+            GamePlayManager.Instance.SetScore(score);
+            GamePlayManager.Instance.SetCoinScore(coinScore);
         }
 
         if(target.tag == "Life")
@@ -75,8 +75,8 @@ public class PlayerScore : Singleton<PlayerScore> {
             target.gameObject.SetActive(false);
 
             //set score
-            GameManager.Instance.SetScore(score);
-            GameManager.Instance.SetLifeScore(lifeScore);
+            GamePlayManager.Instance.SetScore(score);
+            GamePlayManager.Instance.SetLifeScore(lifeScore);
         }
 
         if(target.tag == "Bounds")
@@ -86,6 +86,10 @@ public class PlayerScore : Singleton<PlayerScore> {
             coutScore = false;
 
             lifeScore--;
+
+            //GameOver
+            GamePlayManager.Instance.GameOverShowFinalScore(coinScore, score);
+
             //Move player, to make it look like he died.
             transform.position = new Vector3(800, 800, 0);
             //Fix
@@ -98,6 +102,9 @@ public class PlayerScore : Singleton<PlayerScore> {
             //Stop camea
             cameraScript.moveCamera = false;
             coutScore = false;
+
+            //GameOver
+            GamePlayManager.Instance.GameOverShowFinalScore(coinScore, score);
 
             lifeScore--;
             //Move player, to make it look like he died.

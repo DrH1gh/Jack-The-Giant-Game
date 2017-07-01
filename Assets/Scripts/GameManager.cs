@@ -1,63 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
 
-    [SerializeField]
-    private Text coinText, scoreText, lifeText;
+    [HideInInspector]
+    public bool RestartGamePlayerDied, NewGame;
 
-    [SerializeField]
-    private GameObject pausePanel;
+    [HideInInspector]
+    public int sessionScore, sessionCoinScore, sessionLifeScore;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+    void Awake () {
+        Instance.RestartGamePlayerDied = false;
+        Instance.NewGame = true;
 	}
 
-
-    public void SetScore(int score)
+    void Start()
     {
-        scoreText.text = score.ToString();
+        GamePlay();
     }
 
-    public void SetCoinScore(int coin_score)
+    // Update is called once per frame
+    void Update () {
+		
+	}
+
+    void GamePlay()
     {
-        coinText.text = "x" + coin_score;
+        if (RestartGamePlayerDied) {
+            GamePlayManager.Instance.SetScore(sessionScore);
+            GamePlayManager.Instance.SetCoinScore(sessionCoinScore);
+            GamePlayManager.Instance.SetLifeScore(sessionLifeScore);
+
+            PlayerScore.Instance.score = sessionScore;
+            PlayerScore.Instance.coinScore = sessionCoinScore;
+            PlayerScore.Instance.lifeScore = sessionLifeScore;
+
+        }else if (NewGame)
+        {
+            PlayerScore.Instance.score = 0;
+            PlayerScore.Instance.coinScore = 0;
+            PlayerScore.Instance.lifeScore = 2;
+
+            GamePlayManager.Instance.SetScore(PlayerScore.Instance.score);
+            GamePlayManager.Instance.SetCoinScore(PlayerScore.Instance.coinScore);
+            GamePlayManager.Instance.SetLifeScore(PlayerScore.Instance.lifeScore);
+        }
+    
     }
 
-    public void SetLifeScore(int life_score)
-    {
-        lifeText.text = "x" + life_score;
-    }
 
-    public void PauseTheGame()
-    {
-        Time.timeScale = 0f;
-        pausePanel.SetActive(true);
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        pausePanel.SetActive(false);
-    }
-
-    public void QuitGame()
-    {
-        Time.timeScale = 1f;
-
-
-        //Destoy all instance. 
-        Destroy(GameObject.Find("Main Camera"));
-        Destroy(GameObject.Find("GameManager"));
-
-        Application.LoadLevel("Menu");
-    }
 }

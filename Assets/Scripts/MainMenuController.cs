@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : Singleton<MainMenuController> {
 
@@ -13,17 +14,17 @@ public class MainMenuController : Singleton<MainMenuController> {
 	
     public void StartGame()
     {
-        Application.LoadLevel("Game");
+        SceneManager.LoadScene("Game");
     }
 
     public void HighScore()
     {
-        Application.LoadLevel("Highscore");
+        SceneManager.LoadScene("Highscore");
     }
 
     public void Options()
     {
-        Application.LoadLevel("Options");
+        SceneManager.LoadScene("Options");
     }
 
     public void Music()

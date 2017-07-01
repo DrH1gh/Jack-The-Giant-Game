@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HighScoreController : Singleton<HighScoreController> {
 
@@ -11,6 +12,6 @@ public class HighScoreController : Singleton<HighScoreController> {
 	
     public void GoBack()
     {
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 }
