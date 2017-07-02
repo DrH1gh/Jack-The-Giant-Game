@@ -79,7 +79,7 @@ public class PlayerScore : Singleton<PlayerScore> {
             GamePlayManager.Instance.SetLifeScore(lifeScore);
         }
 
-        if(target.tag == "Bounds")
+        if(target.tag == "Bounds" || target.tag == "DeadlyCloud")
         {
             //Stop camea
             cameraScript.moveCamera = false;
@@ -87,16 +87,13 @@ public class PlayerScore : Singleton<PlayerScore> {
 
             lifeScore--;
 
+            //Move player, to make it look like he died.
+            transform.position = new Vector3(800, 800, 0);
             //Check If game over
             GameManager.Instance.CheckGameStatus(score, coinScore, lifeScore);
 
-            //Move player, to make it look like he died.
-            transform.position = new Vector3(800, 800, 0);
-            //Fix
-            //Destroy(gameObject);
-           
         }
-
+/*
         if (target.tag == "DeadlyCloud")
         {
             //Stop camea
@@ -106,13 +103,14 @@ public class PlayerScore : Singleton<PlayerScore> {
             
             lifeScore--;
 
+            
+            //Move player, to make it look like he died.
+            transform.position = new Vector3(800, 800, 0);
             //Check If game over
             GameManager.Instance.CheckGameStatus(score, coinScore, lifeScore);
 
-            //Move player, to make it look like he died.
-            transform.position = new Vector3(800, 800, 0);
-            //Fix
-            //Destroy(gameObject);
         }
+
+    */
     }
 }

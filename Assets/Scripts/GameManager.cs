@@ -60,15 +60,56 @@ public class GameManager : Singleton<GameManager> {
 
     public void CheckGameStatus(int score, int coinScore, int lifeScore)
     {
+        //GameOVER
         if(lifeScore < 0)
         {
+            //From Prefeences
+            if(GamePeferences.GetEasyDifficulty() == 1)
+            {
+                int _score = GamePeferences.GetEasyDiffScore();
+                int _coin = GamePeferences.GetEasyDiffCoinScore();
+
+                if(_score < score)
+                    GamePeferences.SetEasyDiffScore(score);
+
+                if (_coin < coinScore)
+                    GamePeferences.SetEasyDiffCoinScore(coinScore);
+
+            }
+
+            if (GamePeferences.GetMediumDifficulty() == 1)
+            {
+                int _score = GamePeferences.GetMediumDiffScore();
+                int _coin = GamePeferences.GetMediumDiffCoinScore();
+
+                if (_score < score)
+                    GamePeferences.SetMediumDiffScore(score);
+
+                if (_coin < coinScore)
+                    GamePeferences.SetMediumDiffCoinScore(coinScore);
+
+            }
+
+            if (GamePeferences.GetHardDifficulty() == 1)
+            {
+                int _score = GamePeferences.GetHardDiffScore();
+                int _coin = GamePeferences.GetHardDiffCoinScore();
+
+                if (_score < score)
+                    GamePeferences.SetHardDiffScore(score);
+
+                if (_coin < coinScore)
+                    GamePeferences.SetHardDiffCoinScore(coinScore);
+
+            }
+
             RestartGamePlayerDied = false;
             NewGameFomMainMenu = false;
 
             GamePlayManager.Instance.GameOverShowFinalScore(coinScore, score);
         }
         else
-        {
+        {//Still have lifes
             sessionScore = score;
             sessionCoinScore = coinScore;
             sessionLifeScore = lifeScore;

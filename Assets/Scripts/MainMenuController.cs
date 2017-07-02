@@ -5,12 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : Singleton<MainMenuController> {
 
+
+    [SerializeField]
+    private Button musicButton;
+
+    [SerializeField]
+    private Sprite[] musicIcons;
+
+
     // Use this for initialization
     void Start () {
         //Using Instance, activate the singleton pattern.
        // Instance.StartGame();
 	}
 	
+    void CheckToPlayMusic()
+    {
+        if(GamePeferences.GetMusic() == 1)
+        {
+            MusicManager.Instance.PlayMusic(true);
+        }
+    }
 	
     public void StartGame()
     {

@@ -32,8 +32,8 @@ public class PlayerLimits : MonoBehaviour {
     private void SetMinMax()
     {
         Vector3 cameraBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        maxX = cameraBounds.x - 0.5f; 
-        minX = -cameraBounds.x + 0.5f;
+        maxX = cameraBounds.x - 0.4f; 
+        minX = -cameraBounds.x + 0.4f;
     }
 
 }

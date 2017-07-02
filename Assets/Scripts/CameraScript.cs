@@ -5,15 +5,33 @@ using UnityEngine;
 
 public class CameraScript : Singleton<CameraScript> {
 
-    private float speed = 1f;
+    private float speed = 1.4f;
     private float acceleration = 0.2f;
     private float maxSpeed = 3.2f;
+
+    private float easySpeed = 3.4f;
+    private float mediumSpeed = 4.2f;
+    private float hardSpeed = 5f;
 
     [HideInInspector]
     public bool moveCamera;
 
 	// Use this for initialization
 	void Start () {
+        if(GamePeferences.GetEasyDifficulty() == 1)
+        {
+            maxSpeed = easySpeed;
+        }
+        if (GamePeferences.GetMediumDifficulty() == 1)
+        {
+            maxSpeed = mediumSpeed;
+        }
+        if (GamePeferences.GetHardDifficulty() == 1)
+        {
+            maxSpeed = hardSpeed;
+        }
+
+
         moveCamera = true;
 	}
 	

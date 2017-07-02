@@ -113,6 +113,10 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                         if(clouds[i].tag != "DeadlyCloud")
                         {
 
+                            //A bit more randomly
+                            int generateCoins = Random.Range(1, 9);
+                            if (generateCoins == 3 || generateCoins == 6 || generateCoins == 9 || generateCoins == 7) return;
+
                             if (!collectables[randomIndex].activeInHierarchy)
                             {
                                 Vector3 tempCloud = clouds[i].transform.position;
@@ -131,6 +135,9 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                                     {
                                         collectables[randomIndex].transform.position = tempCloud;
                                         collectables[randomIndex].SetActive(true);
+                                    }else
+                                    {
+                                        collectables[randomIndex].SetActive(false);
                                     }
                                 }
                                 else
@@ -139,6 +146,10 @@ public class CloudSpawner : Singleton<CloudSpawner> {
                                     collectables[randomIndex].SetActive(true);
                                 }
                             }
+                        }else
+                        {
+                            //Don't know why, but sometimes..coins get on DeadlyClouds
+                            collectables[randomIndex].SetActive(false);
                         }
 
                     }
