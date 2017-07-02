@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Singleton<Player> {
-    [SerializeField]
     private float speed = 8f;
-    [SerializeField]
     private float maxVelocity = 4f;
 
     private Rigidbody2D playerBody;
