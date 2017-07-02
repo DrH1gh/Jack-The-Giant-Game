@@ -115,10 +115,13 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     IEnumerator PlayerDiedRestart()
     {
-        yield return new WaitForSeconds(1f);
-        
+        yield return new WaitForSeconds(0.5f);
+        pauseButton.SetActive(false);
         //SceneManager.LoadScene("Game");
         SceneFaderScript.Instance.LoadLevel("Game");
         DestroyAllSingletons();
+
+        yield return new WaitForSeconds(0.7f);
+        pauseButton.SetActive(true);
     }
 }
