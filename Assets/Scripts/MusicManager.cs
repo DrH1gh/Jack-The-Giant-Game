@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MusicManager : MonoBehaviour {
+public class MusicManager : Singleton<MusicManager> {
+
+    private AudioSource audioSource; 
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+        audioSource = GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
+    public void PlayMusic(bool play)
+    {
+        if (play)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+    }
 }

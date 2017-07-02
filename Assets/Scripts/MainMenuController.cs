@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : Singleton<MainMenuController> {
 
@@ -16,7 +17,8 @@ public class MainMenuController : Singleton<MainMenuController> {
     // Use this for initialization
     void Start () {
         //Using Instance, activate the singleton pattern.
-       // Instance.StartGame();
+        // Instance.StartGame();
+        CheckToPlayMusic();
 	}
 	
     void CheckToPlayMusic()
@@ -24,6 +26,11 @@ public class MainMenuController : Singleton<MainMenuController> {
         if(GamePeferences.GetMusic() == 1)
         {
             MusicManager.Instance.PlayMusic(true);
+            musicButton.image.sprite = musicIcons[1];
+        }else
+        {
+            MusicManager.Instance.PlayMusic(false);
+            musicButton.image.sprite = musicIcons[0];
         }
     }
 	
@@ -46,6 +53,16 @@ public class MainMenuController : Singleton<MainMenuController> {
 
     public void Music()
     {
-        
+        if(GamePeferences.GetMusic() == 0)
+        {
+            GamePeferences.SetMusic(1);
+            MusicManager.Instance.PlayMusic(true);
+            musicButton.image.sprite = musicIcons[1];
+        }else
+        {
+            GamePeferences.SetMusic(0);
+            MusicManager.Instance.PlayMusic(false);
+            musicButton.image.sprite = musicIcons[0];
+        }
     }
 }
