@@ -10,7 +10,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     private Text coinText, scoreText, lifeText, gameOverScoreText, gameOverCoinText;
 
     [SerializeField]
-    private GameObject pausePanel, gameOverPanel, readyButton, pauseButton;
+    private GameObject pausePanel, gameOverPanel, readyButton, pauseButton, mainCanvas;
 
     // Use this for initialization
     void Start () {
@@ -54,6 +54,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         readyButton.SetActive(false);
         pausePanel.SetActive(true);
         pauseButton.SetActive(false);
+        mainCanvas.SetActive(false);
     }
 
     public void ResumeGame()
@@ -61,6 +62,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pauseButton.SetActive(true);
+        mainCanvas.SetActive(true);
     }
 
     public void QuitGame()
@@ -68,6 +70,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pauseButton.SetActive(false);
+        mainCanvas.SetActive(false);
         //Destoy all instance. 
         DestroyAllSingletons();
 
@@ -80,6 +83,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     {
         gameOverPanel.SetActive(true);
         pauseButton.SetActive(false);
+        mainCanvas.SetActive(false);
         gameOverScoreText.text = score.ToString();
         gameOverCoinText.text = coinScore.ToString();
 
@@ -117,11 +121,13 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     {
         yield return new WaitForSeconds(0.5f);
         pauseButton.SetActive(false);
+        mainCanvas.SetActive(false);
         //SceneManager.LoadScene("Game");
         SceneFaderScript.Instance.LoadLevel("Game");
         DestroyAllSingletons();
 
         yield return new WaitForSeconds(0.7f);
         pauseButton.SetActive(true);
+        mainCanvas.SetActive(true);
     }
 }
