@@ -54,7 +54,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         readyButton.SetActive(false);
         pausePanel.SetActive(true);
         pauseButton.SetActive(false);
-        mainCanvas.SetActive(false);
+        //mainCanvas.SetActive(false);
     }
 
     public void ResumeGame()
@@ -62,7 +62,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pauseButton.SetActive(true);
-        mainCanvas.SetActive(true);
+        //mainCanvas.SetActive(true);
     }
 
     public void QuitGame()
@@ -70,7 +70,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pauseButton.SetActive(false);
-        mainCanvas.SetActive(false);
+        //mainCanvas.SetActive(false);
         //Destoy all instance. 
         DestroyAllSingletons();
 
@@ -83,7 +83,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     {
         gameOverPanel.SetActive(true);
         pauseButton.SetActive(false);
-        mainCanvas.SetActive(false);
+        
         gameOverScoreText.text = score.ToString();
         gameOverCoinText.text = coinScore.ToString();
 
