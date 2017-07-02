@@ -37,8 +37,8 @@ public class MainMenuController : Singleton<MainMenuController> {
     public void StartGame()
     {
         GameManager.Instance.NewGameFomMainMenu = true;
-        SceneManager.LoadScene("Game");
-
+        //SceneManager.LoadScene("Game");
+        SceneFaderScript.Instance.LoadLevel("Game");
     }
 
     public void HighScore()

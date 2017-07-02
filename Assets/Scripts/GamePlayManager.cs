@@ -10,11 +10,12 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     private Text coinText, scoreText, lifeText, gameOverScoreText, gameOverCoinText;
 
     [SerializeField]
-    private GameObject pausePanel, gameOverPanel, readyButton;
+    private GameObject pausePanel, gameOverPanel, readyButton, pauseButton;
 
     // Use this for initialization
     void Start () {
         //Only when you click ready, game starts!
+        //THIS afects animations, and fade screen!
         Time.timeScale = 0f;
     }
 	
@@ -52,29 +53,33 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 0f;
         readyButton.SetActive(false);
         pausePanel.SetActive(true);
+        pauseButton.SetActive(false);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
+        pauseButton.SetActive(true);
     }
 
     public void QuitGame()
     {
         Time.timeScale = 1f;
-
-
+        pausePanel.SetActive(false);
+        pauseButton.SetActive(false);
         //Destoy all instance. 
         DestroyAllSingletons();
 
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
+        SceneFaderScript.Instance.LoadLevel("Menu");
 
     }
 
     public void GameOverShowFinalScore(int coinScore, int score)
     {
         gameOverPanel.SetActive(true);
+        pauseButton.SetActive(false);
         gameOverScoreText.text = score.ToString();
         gameOverCoinText.text = coinScore.ToString();
 
@@ -85,9 +90,11 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     IEnumerator GameOverLoadMainMenu()
     {
         yield return new WaitForSeconds(4f);
-
+        gameOverPanel.SetActive(false);
+        
         DestroyAllSingletons();
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
+        SceneFaderScript.Instance.LoadLevel("Menu");
     }
 
     public void DestroyAllSingletons()
@@ -110,7 +117,8 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     {
         yield return new WaitForSeconds(1f);
         
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+        SceneFaderScript.Instance.LoadLevel("Game");
         DestroyAllSingletons();
     }
 }
