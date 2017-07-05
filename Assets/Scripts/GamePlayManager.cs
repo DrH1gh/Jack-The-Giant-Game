@@ -74,7 +74,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         //Destoy all instance. 
         DestroyAllSingletons();
 
-        //SceneManager.LoadScene("Menu");
         SceneFaderScript.Instance.LoadLevel("Menu");
 
     }
