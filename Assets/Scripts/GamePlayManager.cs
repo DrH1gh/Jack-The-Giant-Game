@@ -70,7 +70,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pauseButton.SetActive(false);
-        //mainCanvas.SetActive(false);
+        mainCanvas.SetActive(false);
         //Destoy all instance. 
         DestroyAllSingletons();
 
@@ -93,12 +93,13 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     IEnumerator GameOverLoadMainMenu()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2.5f);
         gameOverPanel.SetActive(false);
-        
+        mainCanvas.SetActive(false);
         DestroyAllSingletons();
         //SceneManager.LoadScene("Menu");
         SceneFaderScript.Instance.LoadLevel("Menu");
+
     }
 
     public void DestroyAllSingletons()
